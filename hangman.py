@@ -2,8 +2,8 @@
 # https://www.practicepython.org/solution/2016/10/15/30-pick-word-solutions.html
 
 # function to generate random word from sowpods
+import csv, random
 def picksWord():
-        import csv, random
         word_file = open('sowpods.txt','r')
         allWords = word_file.readlines()
         for i in range(len(allWords)):
