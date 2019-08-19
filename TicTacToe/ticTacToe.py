@@ -40,7 +40,6 @@ def playTicTacToe():
 		game = [[0, 0, 0],
 			[0, 0, 0],
 			[0, 0, 0]]
-		move = 'x'
 		while scoreTicTacToe(game) == 0:
 			createTicTacToe(game)
 			if move == 'x':
