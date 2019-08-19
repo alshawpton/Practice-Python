@@ -1,8 +1,3 @@
-move = 'x'
-game = [[0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]]
-
 def createTicTacToe(game):
         for i in range(3):
                 print(' - '*3)
@@ -33,36 +28,55 @@ def scoreTicTacToe(listLists):
         else:
                 return 0
 
+def playTicTacToe():
+	move = 'x'
+	game = [[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0]]
+	play_again = 'y'
+	x_score = 0
+	y_score = 0
+	while  play_again == 'y':
+		game = [[0, 0, 0],
+			[0, 0, 0],
+			[0, 0, 0]]
+		while scoreTicTacToe(game) == 0:
+			createTicTacToe(game)
+			if move == 'x':
+				select = input('Player X selects (row,col):')
+				select_list = select.split(',')
+				if game[int(select_list[0])-1][int(select_list[1])-1] == 'X' \
+				or game[int(select_list[0])-1][int(select_list[1])-1] == 'Y':
+					print('Space already selected. Choose again.')
+					continue
+				game[int(select_list[0])-1][int(select_list[1])-1] = 'X'
+				move = 'y'
+			else:
+				select = input('Player Y selects (row,col):')
+				select_list = select.split(',')
+				if game[int(select_list[0])-1][int(select_list[1])-1] == 'X' \
+				or game[int(select_list[0])-1][int(select_list[1])-1] == 'Y':
+					print('Space already selected. Choose again.')
+					continue
+				game[int(select_list[0])-1][int(select_list[1])-1] = 'Y'
+				move = 'x'
+			flat_game = [values for lists in game for values in lists]
+			if 0 not in flat_game:
+				break
 
-while scoreTicTacToe(game) == 0:
-        createTicTacToe(game)
-        if move == 'x':
-                select = input('Player X selects (row,col):')
-                select_list = select.split(',')
-                if game[int(select_list[0])-1][int(select_list[1])-1] == 'X' \
-                or game[int(select_list[0])-1][int(select_list[1])-1] == 'Y':
-                        print('Space already selected. Choose again.')
-                        continue
-                game[int(select_list[0])-1][int(select_list[1])-1] = 'X'
-                move = 'y'
-        else:
-                select = input('Player Y selects (row,col):')
-                select_list = select.split(',')
-                if game[int(select_list[0])-1][int(select_list[1])-1] == 'X' \
-                or game[int(select_list[0])-1][int(select_list[1])-1] == 'Y':
-                        print('Space already selected. Choose again.')
-                        continue
-                game[int(select_list[0])-1][int(select_list[1])-1] = 'Y'
-                move = 'x'
-        flat_game = [y for x in game for y in x]
-        if 0 not in flat_game:
-                break
+		createTicTacToe(game)
 
-createTicTacToe(game)
+		if scoreTicTacToe(game) == 'X':
+			print('X wins!')
+			x_score += 1
+		elif scoreTicTacToe(game) == 'Y':
+			print('Y wins!')
+			y_score += 1
+		else:
+			print('Draw')
 
-if scoreTicTacToe(game) == 'X':
-        print('X wins!')
-elif scoreTicTacToe(game) == 'Y':
-        print('Y wins!')
-else:
-        print('Draw')
+		play_again = input('Play again?(y/n)')
+
+	print('Final Score: X: %d  Y: %d' % (x_score,y_score))
+
+playTicTacToe()
