@@ -1,5 +1,11 @@
 import random
 
+rules = """Rules: Guess a 4 digit number.
+       A cow is a correct digit in the correct place.
+       A bull is a correct digit in the wrong place."""
+
+print(rules)
+
 answer = str(random.randint(1000,9999))
 answerList = list(answer)
 #print(answerList)
